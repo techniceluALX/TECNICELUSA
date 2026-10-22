@@ -45,14 +45,14 @@ export default defineConfig({
     VitePWA({
       registerType: 'prompt',
       includeAssets: [
-        'https://assets.tecnicelu.store/favicon.svg',
-        'https://assets.tecnicelu.store/icons.svg',
-        'https://assets.tecnicelu.store/favicon/favicon.ico',
-        'https://assets.tecnicelu.store/favicon/favicon-32x32.png',
-        'https://assets.tecnicelu.store/favicon/favicon-16x16.png',
-        'https://assets.tecnicelu.store/favicon/wordlogo-apple-touch-icon.png',
-        'https://assets.tecnicelu.store/logos/*.webp',
-        'https://assets.tecnicelu.store/logos/*.png',
+        'https://assets.tecnicelu.com/favicon.svg',
+        'https://assets.tecnicelu.com/icons.svg',
+        'https://assets.tecnicelu.com/favicon/favicon.ico',
+        'https://assets.tecnicelu.com/favicon/favicon-32x32.png',
+        'https://assets.tecnicelu.com/favicon/favicon-16x16.png',
+        'https://assets.tecnicelu.com/favicon/wordlogo-apple-touch-icon.png',
+        'https://assets.tecnicelu.com/logos/*.webp',
+        'https://assets.tecnicelu.com/logos/*.png',
         // First-party brand marks: WebP for the storefront, PNG kept for
         // social/OG consumers that do not accept WebP.
         'brand-mark-avatar.webp',
@@ -74,9 +74,9 @@ export default defineConfig({
         background_color: '#020617',
         theme_color: '#06b6d4',
         icons: [
-          { src: 'https://assets.tecnicelu.store/favicon/wordlogo-apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-          { src: 'https://assets.tecnicelu.store/favicon/wordlogo-pwa-192.png', sizes: '192x192', type: 'image/png' },
-          { src: 'https://assets.tecnicelu.store/favicon/wordlogo-pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
+          { src: 'https://assets.tecnicelu.com/favicon/wordlogo-apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+          { src: 'https://assets.tecnicelu.com/favicon/wordlogo-pwa-192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'https://assets.tecnicelu.com/favicon/wordlogo-pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
         ],
       },
       workbox: {
@@ -108,7 +108,7 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: /\/logos\/.*|\/favicon\/.*/i,
+            urlPattern: /\/logos\/.|\/favicon\/.*/i,
             handler: 'CacheFirst',
             options: {
               cacheName: `tecnicelu-assets2-${BUILD_ID}`,

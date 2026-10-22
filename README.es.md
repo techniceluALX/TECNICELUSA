@@ -40,50 +40,53 @@ El servidor de desarrollo Vite usa `http://localhost:3000` y la salida de produc
 
 ## Funciones de administración
 
-- **Promo Assets** en `/admin/promo-assets`: QR de tienda/campañas, QR específico de instalación PWA, acciones de descargar/copiar/compartir y analítica.
-- **Ajustes**: entrega, contacto/WhatsApp, pagos, interfaz, biblioteca de iconos, posición de toast y tiempos promocionales.
-- **Analítica promocional** mediante `POST /admin/analytics`, protegida por el guard existente de administrador y persistida en D1. Registra `event`, `asset`, `source` y timestamp del servidor.
+La interfaz administrativa está protegida por el flujo de autenticación/autorización existente. Incluye:
 
-La analítica promocional es deliberadamente best-effort en el frontend para que un fallo de analítica nunca bloquee la promoción o instalación PWA.
+- **Promo Assets** en `/admin/promo-assets` para QR de tienda/campañas, QR de instalación PWA, descarga/compartir assets de marca y métricas de uso.
+- **Promociones emergentes** en Admin -> Productos -> Promo para gestionar variantes pop-up de productos, servicios y trust badges con preview inmediato; el texto de servicios se guarda en D1.
+- **Configuración de admin** para delivery, contacto/WhatsApp, pagos, interfaz, librería de íconos, posición del toast y ajustes promocionales.
+- **SEO y redes sociales** en `/admin/seo` para configurar título, descripción y imagen OG usadas al compartir enlaces en WhatsApp, Facebook, X y otras redes.
+- **Analytics de Cloudflare** vía `POST /admin/analytics`, usando la autorización de admin del Worker y persistencia en D1. Los eventos guardan `event`, `asset`, `source` y un timestamp del servidor.
+
+La analytics de promos es best-effort y no bloquea la funcionalidad normal del storefront.
 
 ## Rutas principales
 
-- `/` — tienda
-- `/products` — catálogo
-- `/services` — servicios/reparaciones
+- `/` — storefront
+- `/products` — catálogo de productos
+- `/services` — servicios
 - `/checkout` — checkout protegido
-- `/profile` — perfil protegido
-- `/admin` — área administrativa protegida
+- `/profile` — perfil del cliente
+- `/admin` — área administrativa
 - `/admin/settings` — ajustes
-- `/admin/promo-assets` — hub promocional/QR
+- `/admin/seo` — SEO y OG tags
+- `/admin/promo-assets` — hub de assets promocionales
 - `/pwa-install` — guía de instalación PWA
 
 ## Documentación
 
-Consulta [`docs/DOCUMENTATION.md`](./docs/DOCUMENTATION.md) para el índice completo y el estado de la documentación.
-
-- Arquitectura: `docs/ARCHITECTURE.md` / `docs/ARCHITECTURE.es.md`
-- Build: `docs/BUILD.md` / `docs/BUILD.es.md`
-- Carrito y auth: `docs/cart-and-auth.md` / `docs/cart-and-auth.es.md`
-- Proveedores de autenticación: `docs/AUTHENTICATION.md` / `docs/AUTHENTICATION.es.md`
-- WhatsApp Business y OTP: `docs/WHATSAPP_CLOUD_API.md`
-- Despliegue: `docs/deployment.md` / `docs/deployment.es.md`
-- Cloudflare: `docs/cloudflare/README.md` / `docs/cloudflare/README.es.md`
-- Roadmap: `docs/ROADMAP.md` / `docs/ROADMAP.es.md`
-- Importación de productos: `docs/ADMIN_PRODUCT_IMPORT.md` / `docs/ADMIN_PRODUCT_IMPORT.es.md`
-- Importación de catálogo PDF de proveedores: `docs/CATALOG_PDF_IMPORT.md` / `docs/CATALOG_PDF_IMPORT.es.md`
-- Notificaciones: `docs/NOTIFICATIONS.md` / `docs/NOTIFICATIONS.es.md`
-- Conversaciones: `docs/CONVERSATIONS.md` / `docs/CONVERSATIONS.es.md`
-- Voz/IA: `docs/VOICE-AI.md` / `docs/VOICE-AI.es.md`
-- Expo: `docs/EXPO_MOBILE_PLAN.md` / `docs/EXPO_MOBILE_PLAN.es.md`
-- Pagos: `docs/PAYMENTS.md` / `docs/PAYMENTS.es.md`
+- [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) / [docs/ARCHITECTURE.es.md](./docs/ARCHITECTURE.es.md) - Arquitectura del sistema y estructura de componentes
+- [docs/BUILD.md](./docs/BUILD.md) / [docs/BUILD.es.md](./docs/BUILD.es.md) - Proceso de build y scripts
+- [docs/STYLE_REFERENCE.md](./docs/STYLE_REFERENCE.md) / [docs/STYLE_REFERENCE.es.md](./docs/STYLE_REFERENCE.es.md) - Base semántica del tema visual
+- [docs/cart-and-auth.md](./docs/cart-and-auth.md) / [docs/cart-and-auth.es.md](./docs/cart-and-auth.es.md) - Carrito, checkout, autenticación y comportamiento API
+- [docs/AUTHENTICATION.md](./docs/AUTHENTICATION.md) / [docs/AUTHENTICATION.es.md](./docs/AUTHENTICATION.es.md) - Google, GitHub admin access y proveedor WhatsApp OTP
+- [docs/WHATSAPP_CLOUD_API.md](./docs/WHATSAPP_CLOUD_API.md) - Webhook, sender y setup de WhatsApp Business Cloud API
+- [docs/MERCADO_PAGO.md](./docs/MERCADO_PAGO.md) - Setup de Checkout Bricks y webhook de Mercado Pago
+- [docs/PAYMENTS.md](./docs/PAYMENTS.md) - Arquitectura de proveedores y notas de rollout
+- [docs/deployment.md](./docs/deployment.md) / [docs/deployment.es.md](./docs/deployment.es.md) - Guía de despliegue
+- [docs/cloudflare/README.md](./docs/cloudflare/README.md) / [docs/cloudflare/README.es.md](./docs/cloudflare/README.es.md) - Operaciones Cloudflare
+- [docs/AI_PROVIDERS.md](./docs/AI_PROVIDERS.md) - Cadena unificada de proveedores IA y administración de claves desde Admin → IA
+- [docs/CHATBOT_CAPABILITIES.md](./docs/CHATBOT_CAPABILITIES.md) - Capacidades del chatbot, manejo de datos y verificación WebM local
+- [docs/CATALOG_PDF_IMPORT.md](./docs/CATALOG_PDF_IMPORT.md) / [docs/CATALOG_PDF_IMPORT.es.md](./docs/CATALOG_PDF_IMPORT.es.md) - Importación de catálogo PDF, extracción con Vision, batches, publicación y aprobación
+- [docs/ADMIN_PROMO_POPUPS.md](./docs/ADMIN_PROMO_POPUPS.md) / [docs/ADMIN_PROMO_POPUPS.es.md](./docs/ADMIN_PROMO_POPUPS.es.md) - Flujo de popups promocionales de productos, servicios y trust badges
+- [docs/PUSH_NOTIFICATIONS.md](./docs/PUSH_NOTIFICATIONS.md) - Notificaciones web y configuración VAPID
 
 ## Configuración de entorno
 
 Solo variables públicas de build:
 
 ```text
-VITE_API_BASE=https://api.tecnicelu.store
+VITE_API_BASE=https://api.tecnicelu.com
 VITE_YOUTUBE_VIDEO_ID=<ID de YouTube>
 VITE_WHATSAPP_NUMBER=<número internacional de WhatsApp>
 ```
@@ -102,7 +105,7 @@ No pongas credenciales de proveedores ni otros secretos en el frontend. Los secr
 
 ## Despliegue
 
-**Producción**: Cloudflare Pages (`tecnicelu.store`) + Worker (`api.tecnicelu.store`).
+**Producción**: Cloudflare Pages (`tecnicelu.com`) + Worker (`api.tecnicelu.com`).
 
 - Rama: `main`
 - Build: `npm install && npm run build`

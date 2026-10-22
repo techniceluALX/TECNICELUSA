@@ -58,10 +58,10 @@ src/
 
 Admin functionality is protected by the existing authentication/authorization flow. The admin area includes:
 
-- **Promo Assets** at `/admin/promo-assets` for generating store/campaign QR codes, generating a dedicated PWA-install QR, downloading/copying/sharing QR and brand assets, and tracking promo asset interactions.
+- **Promo Assets** at `/admin/promo-assets` for generating store/campaign QR codes, generating a dedicated PWA-install QR, downloading/copying/sharing QR and brand assets, and tracking promo asset usage.
 - **Promo popups** in Admin -> Products -> Promo for managing product, service, and trust-badge modal variants. Each variant has an immediate preview button; service promo copy is D1-backed.
 - **Admin settings** for delivery, contact/WhatsApp, payments, interface, icon library, toast positioning, and promotional settings.
-- **SEO & social sharing** at `/admin/seo` for managing Open Graph title, description, and preview image used when links are shared on WhatsApp, Facebook, X, and other networks. Includes a live link-preview card.
+- **SEO & social sharing** at `/admin/seo` for managing Open Graph title, description, and preview image used when links are shared on WhatsApp, Facebook, X, and other networks. Includes a live preview and save flow.
 - **Cloudflare analytics** via `POST /admin/analytics`, using the existing Worker admin authorization and D1 persistence. Events store `event`, `asset`, `source`, and a server-side timestamp.
 
 The promo analytics endpoint is intentionally best-effort from the frontend so analytics failures never block normal promo or PWA functionality.
@@ -98,7 +98,7 @@ webhook, amount/currency matching, refund handling, 34 payment tests) but is
 `MP_PUBLIC_KEY` or `MP_WEBHOOK_SECRET` set, so it is offered at checkout and
 returns 503. Production credentials are Worker secrets, the live Worker variable
 is `MERCADOPAGO_ENVIRONMENT = "production"`, and the production webhook URL is
-`https://api.tecnicelu.store/payments/mercadopago/webhook`.
+`https://api.tecnicelu.com/payments/mercadopago/webhook`.
 
 See [docs/MERCADO_PAGO.md](./docs/MERCADO_PAGO.md),
 [docs/MERCADO_PAGO_AUDIT.md](./docs/MERCADO_PAGO_AUDIT.md) and
@@ -128,7 +128,7 @@ for the command flow and full provider reference.
 - [docs/cloudflare/README.md](./docs/cloudflare/README.md) / [docs/cloudflare/README.es.md](./docs/cloudflare/README.es.md) - Cloudflare operations
 - [docs/AI_PROVIDERS.md](./docs/AI_PROVIDERS.md) - Unified AI provider fallback chain and Admin → IA key management
 - [docs/CHATBOT_CAPABILITIES.md](./docs/CHATBOT_CAPABILITIES.md) - Current chatbot capabilities, data handling, and local WebM verification
-- [docs/CATALOG_PDF_IMPORT.md](./docs/CATALOG_PDF_IMPORT.md) / [docs/CATALOG_PDF_IMPORT.es.md](./docs/CATALOG_PDF_IMPORT.es.md) - Supplier PDF catalog import, Vision extraction, draft batches, publishing, and production deployment notes
+- [docs/CATALOG_PDF_IMPORT.md](./docs/CATALOG_PDF_IMPORT.md) / [docs/CATALOG_PDF_IMPORT.es.md](./docs/CATALOG_PDF_IMPORT.es.md) - Supplier PDF catalog import, Vision extraction, draft batches, publishing, and approval flow
 - [docs/ADMIN_PROMO_POPUPS.md](./docs/ADMIN_PROMO_POPUPS.md) / [docs/ADMIN_PROMO_POPUPS.es.md](./docs/ADMIN_PROMO_POPUPS.es.md) - Product, service, and trust-badge promo popup workflow
 - [docs/PUSH_NOTIFICATIONS.md](./docs/PUSH_NOTIFICATIONS.md) - Web Push and VAPID configuration
 - [AGENTS.md](./AGENTS.md) - AI agent guidelines and project scope
@@ -138,7 +138,7 @@ for the command flow and full provider reference.
 Required environment variables (build-time, public, no secrets):
 
 ```text
-VITE_API_BASE=https://api.tecnicelu.store
+VITE_API_BASE=https://api.tecnicelu.com
 VITE_YOUTUBE_VIDEO_ID=<YouTube video ID>
 VITE_WHATSAPP_NUMBER=<international WhatsApp number> <!-- fallback; runtime value from Admin → Ajustes -->
 VITE_LOGO_DEV_TOKEN=<Logo.dev publishable key> <!-- optional; fallback key is compiled in -->
@@ -162,7 +162,7 @@ The "Marcas que manejamos" strip renders brand logos from [Logo.dev](https://www
 
 ## Deployment
 
-**Active target**: Cloudflare Pages (`tecnicelu.store`)
+**Active target**: Cloudflare Pages (`tecnicelu.com`)
 
 - Production branch: `main`
 - Build command: `npm install && npm run build`

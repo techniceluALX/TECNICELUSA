@@ -1,0 +1,556 @@
+@import '@fontsource/oxanium/400.css';
+@import '@fontsource/oxanium/600.css';
+@import '@fontsource/oxanium/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme values are RGB channels so Tailwind's /opacity modifiers remain available. */
+:root,
+[data-theme='neon-tech'] {
+  --color-canvas: 2 6 23; /* #020617 */
+  --color-surface: 15 23 42; /* #0f172a */
+  --color-surface-raised: 30 41 59; /* #1e293b */
+  --color-border: 51 65 85; /* #334155 */
+  --color-text-primary: 248 250 252; /* #f8fafc */
+  --color-text-muted: 148 163 184; /* #94a3b8 */
+  --color-text-subtle: 100 116 139; /* #64748b */
+  --color-text-on-brand: 255 255 255; /* #ffffff */
+  --color-brand-primary: 6 182 212; /* #06b6d4 */
+  --color-brand-strong: 8 145 178; /* #0891b2 */
+  --color-brand-secondary: 192 132 252; /* #c084fc */
+  --color-focus: 34 211 238; /* #22d3ee */
+  --color-glass: 255 255 255; /* #ffffff */
+  --color-glass-hover: 255 255 255; /* #ffffff */
+  --color-glass-border: 255 255 255; /* #ffffff */
+  --color-glass-overlay: 0 0 0; /* #000000 */
+  --color-success: 52 211 153; /* #34d399 */
+  --color-success-strong: 16 185 129; /* #10b981 */
+  --color-success-contrast: 2 44 34; /* #022c22 */
+  --color-warning: 250 204 21; /* #facc15 */
+  --color-warning-strong: 234 179 8; /* #eab308 */
+  --color-warning-contrast: 66 32 6; /* #422006 */
+  --color-danger: 248 113 113; /* #f87171 */
+  --color-danger-strong: 239 68 68; /* #ef4444 */
+  --color-danger-contrast: 69 10 10; /* #450a0a */
+  --color-info: 34 211 238; /* #22d3ee */
+  --color-info-strong: 6 182 212; /* #06b6d4 */
+  --color-info-contrast: 8 47 73; /* #082f49 */
+  --color-display-highlight: 250 204 21; /* #facc15 */
+  --color-whatsapp: 37 211 102; /* #25d366 */
+  --color-whatsapp-surface: 18 64 42; /* #12402a */
+}
+
+/* Sample alternate theme: switch with applyTheme('aurora'). */
+[data-theme='aurora'] {
+  --color-canvas: 8 20 32; /* #081420 */
+  --color-surface: 16 38 52; /* #102634 */
+  --color-surface-raised: 27 55 68; /* #1b3744 */
+  --color-border: 59 96 105; /* #3b6069 */
+  --color-text-primary: 239 253 250; /* #effdfa */
+  --color-text-muted: 167 211 203; /* #a7d3cb */
+  --color-text-subtle: 111 153 148; /* #6f9994 */
+  --color-text-on-brand: 4 28 30; /* #041c1e */
+  --color-brand-primary: 45 212 191; /* #2dd4bf */
+  --color-brand-strong: 13 148 136; /* #0d9488 */
+  --color-brand-secondary: 167 139 250; /* #a78bfa */
+  --color-focus: 94 234 212; /* #5eead4 */
+  --color-glass: 220 252 231; /* #dcfce7 */
+  --color-glass-hover: 240 253 250; /* #f0fdfa */
+  --color-glass-border: 153 246 228; /* #99f6e4 */
+  --color-glass-overlay: 2 12 18; /* #020c12 */
+  --color-success: 74 222 128; /* #4ade80 */
+  --color-success-strong: 34 197 94; /* #22c55e */
+  --color-success-contrast: 5 46 22; /* #052e16 */
+  --color-warning: 251 191 36; /* #fbbf24 */
+  --color-warning-strong: 217 119 6; /* #d97706 */
+  --color-warning-contrast: 69 26 3; /* #451a03 */
+  --color-danger: 251 113 133; /* #fb7185 */
+  --color-danger-strong: 225 29 72; /* #e11d48 */
+  --color-danger-contrast: 76 5 25; /* #4c0519 */
+  --color-info: 96 165 250; /* #60a5fa */
+  --color-info-strong: 37 99 235; /* #2563eb */
+  --color-info-contrast: 23 37 84; /* #172554 */
+  --color-display-highlight: 251 191 36; /* #fbbf24 */
+  --color-whatsapp: 37 211 102; /* #25d366 */
+  --color-whatsapp-surface: 15 62 44; /* #0f3e2c */
+}
+
+@layer base {
+  body {
+    @apply bg-canvas text-ink;
+    background-image: radial-gradient(circle at 0.75px 0.75px, rgb(var(--color-glass) / 0.06) 0.75px, transparent 0.9px);
+    background-size: 1.125rem 1.125rem;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply border border-glass-line/10 bg-glass/5 backdrop-blur-lg;
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl p-4 transition-all duration-300 hover:bg-glass-hover/10;
+  }
+
+  .header-glass {
+    border-bottom: 1px solid rgb(var(--color-glass-border) / 0.18);
+    background: linear-gradient(90deg, rgb(var(--color-surface) / 0.9), rgb(var(--color-canvas) / 0.84), rgb(var(--color-surface) / 0.9));
+    box-shadow: 0 0.75rem 2rem rgb(var(--color-canvas) / 0.28), inset 0 -1px rgb(var(--color-glass-border) / 0.05);
+    backdrop-filter: blur(1.5rem) saturate(1.2);
+  }
+
+  .service-preview-panel {
+    background: linear-gradient(135deg, rgb(var(--color-brand-primary) / 0.2), rgb(var(--color-surface) / 0.96) 45%, rgb(var(--color-brand-secondary) / 0.2));
+  }
+
+  .hero-future {
+    -webkit-text-stroke: 0.5px rgb(var(--color-display-highlight) / 0.35);
+    text-shadow: 0 0 0.75rem rgb(var(--color-display-highlight) / 0.22);
+  }
+
+  .hero-copy-stage {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-copy-stage::before {
+    position: absolute;
+    z-index: -1;
+    inset: -1.5rem -1rem;
+    content: '';
+    background: radial-gradient(ellipse at 50% 40%, rgb(var(--color-brand-primary) / 0.16), transparent 64%), radial-gradient(ellipse at 75% 15%, rgb(var(--color-brand-secondary) / 0.1), transparent 54%);
+    border-radius: 2.5rem;
+    filter: blur(0.35rem);
+  }
+
+  .mobile-menu-panel {
+    isolation: isolate;
+    opacity: 1;
+    background: rgb(var(--color-canvas)) !important;
+  }
+
+  .app-btn {
+    @apply rounded-xl border border-brand/45 bg-brand/10 px-6 py-3 font-semibold text-brand backdrop-blur-md transition-colors hover:border-brand/70 hover:bg-brand/20;
+  }
+
+  .btn-glass-primary {
+    @apply glass rounded-xl px-6 py-3 font-semibold text-brand transition-all hover:bg-brand/20;
+  }
+
+  .btn-glass-secondary {
+    @apply glass rounded-xl px-6 py-3 font-semibold text-accent transition-all hover:bg-accent/20;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 20px rgb(var(--color-brand-primary) / 0.3);
+  }
+
+  .neon-glow:hover {
+    box-shadow: 0 0 30px rgb(var(--color-brand-primary) / 0.5);
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+
+  @keyframes gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes page-enter {
+    from { opacity: 0; transform: translateY(1rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-transition {
+    animation: page-enter 500ms ease-out;
+  }
+
+  .home-snap-section {
+    @apply min-h-screen;
+  }
+
+  .products-scroll-grid {
+    @apply scroll-smooth;
+  }
+
+  /* Single-column phones: keep tiles at grid-unit width, centered */
+  @media (max-width: 38rem) {
+    .products-scroll-grid > * {
+      max-width: 16rem;
+      margin-inline: auto;
+    }
+  }
+
+  .product-image-size {
+    @apply w-full h-full object-contain;
+  }
+
+  .product-image-panel {
+    box-shadow: 0 0 1.5rem rgb(var(--color-glass) / 0.1);
+  }
+
+  .colombia-flag {
+    width: 1.25rem;
+    height: 0.85rem;
+    border: 1px solid rgb(var(--color-glass-border) / 0.35);
+    border-radius: 0.15rem;
+    background: linear-gradient(to bottom, #fcd116 0 50%, #003893 50% 75%, #ce1126 75% 100%);
+    box-shadow: 0 0.1rem 0.3rem rgb(var(--color-canvas) / 0.3);
+  }
+
+  .brand-mark {
+    animation: logo-slide-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both, logo-glow-pulse 6s ease-in-out 0.8s infinite;
+  }
+
+  .header-wordmark-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-wordmark-wrap::before {
+    position: absolute;
+    inset: 0 -1rem;
+    z-index: -1;
+    border-radius: 0.5rem;
+    background: radial-gradient(ellipse at center, rgb(var(--color-brand-primary) / 0.12) 0%, rgb(var(--color-brand-secondary) / 0.06) 50%, transparent 70%);
+    content: '';
+    filter: blur(8px);
+    animation: wordlogo-backglow 6s ease-in-out infinite;
+  }
+
+  .header-logo-word {
+    animation: logo-slide-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
+
+  .whatsapp-button {
+    background-color: rgb(var(--color-whatsapp-surface));
+    box-shadow: 0 4px 20px rgb(var(--color-whatsapp) / 0.4);
+    animation: whatsapp-pulse 3s ease-in-out infinite;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .whatsapp-button:hover {
+    background-color: rgb(var(--color-whatsapp-surface) / 1);
+    box-shadow: 0 6px 30px rgb(var(--color-whatsapp) / 0.6);
+    transform: scale(1.1);
+  }
+
+  .whatsapp-icon {
+    animation: whatsapp-icon-pulse 3s ease-in-out infinite;
+  }
+
+  /* Logo Animations */
+  @keyframes logo-glow-pulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 6px rgb(var(--color-brand-primary) / 0.3)) drop-shadow(0 0 15px rgb(var(--color-brand-primary) / 0.15));
+    }
+    50% {
+      filter: drop-shadow(0 0 12px rgb(var(--color-brand-primary) / 0.6)) drop-shadow(0 0 25px rgb(var(--color-brand-primary) / 0.3));
+    }
+  }
+
+  @keyframes logo-slide-in {
+    0% {
+      opacity: 0;
+      transform: translateX(-20px);
+      filter: blur(4px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+      filter: blur(0px);
+    }
+  }
+
+  @keyframes logo-scan-line {
+    0% {
+      left: -5%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  @keyframes logo-glow-pulse-box {
+    0%, 100% {
+      box-shadow: 0 0 6px rgb(var(--color-brand-primary) / 0.3), 0 0 15px rgb(var(--color-brand-primary) / 0.15);
+    }
+    50% {
+      box-shadow: 0 0 12px rgb(var(--color-brand-primary) / 0.6), 0 0 25px rgb(var(--color-brand-primary) / 0.3);
+    }
+  }
+
+  @keyframes wordlogo-backglow {
+    0%, 100% {
+      opacity: 0.6;
+      filter: blur(8px);
+      background: radial-gradient(ellipse at center, rgb(var(--color-brand-primary) / 0.12) 0%, rgb(var(--color-brand-secondary) / 0.06) 50%, transparent 70%);
+    }
+    33% {
+      opacity: 1;
+      filter: blur(10px);
+      background: radial-gradient(ellipse at center, rgb(var(--color-brand-primary) / 0.18) 0%, rgb(var(--color-brand-secondary) / 0.10) 50%, transparent 70%);
+    }
+    66% {
+      opacity: 0.8;
+      filter: blur(6px);
+      background: radial-gradient(ellipse at center, rgb(var(--color-brand-secondary) / 0.14) 0%, rgb(var(--color-brand-primary) / 0.08) 50%, transparent 70%);
+    }
+  }
+
+  @keyframes wordlogo-scan {
+    0%, 70%, 100% {
+      left: -100%;
+      opacity: 0;
+    }
+    80% {
+      opacity: 1;
+    }
+    90% {
+      left: 100%;
+      opacity: 0.6;
+    }
+  }
+
+  .header-wordmark-wrap.animated::before {
+    content: '';
+    position: absolute;
+    inset: 0 -16px;
+    border-radius: 8px;
+    background: radial-gradient(ellipse at center, rgb(var(--color-brand-primary) / 0.12) 0%, rgb(var(--color-brand-secondary) / 0.06) 50%, transparent 70%);
+    filter: blur(8px);
+    animation: wordlogo-backglow 6s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .header-wordmark-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgb(var(--color-brand-primary) / 0.25), transparent);
+    animation: wordlogo-scan 8s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* Header Scroll Progress Bar */
+  .header-glass {
+    position: relative;
+  }
+
+  .header-glass::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: var(--scroll-pct, 0%);
+    background: linear-gradient(90deg, rgb(var(--color-brand-primary)), rgb(var(--color-brand-secondary)));
+    z-index: 1;
+    pointer-events: none;
+    transition: width 0.1s ease-out;
+  }
+
+  @keyframes whatsapp-pulse {
+    0%, 100% { box-shadow: 0 4px 20px rgb(var(--color-whatsapp) / 0.4); }
+    50% { box-shadow: 0 4px 30px rgb(var(--color-whatsapp) / 0.6), 0 0 0 15px rgb(var(--color-whatsapp) / 0.1); }
+  }
+
+  @keyframes whatsapp-icon-pulse {
+    0%, 100% { filter: drop-shadow(0 0 0.15rem rgb(var(--color-whatsapp) / 0.45)); }
+    50% { filter: drop-shadow(0 0 0.45rem rgb(var(--color-whatsapp) / 0.95)); }
+  }
+
+  /* Trust Badge Staggered Animation */
+  @keyframes badge-line-appear {
+    0% { opacity: 0; transform: translateX(-14px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes checkmark-pop {
+    0% { opacity: 0; transform: scale(0.3) rotate(-20deg); }
+    60% { opacity: 1; transform: scale(1.15) rotate(3deg); }
+    80% { transform: scale(0.95) rotate(-1deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  .trust-badge-item {
+    opacity: 0;
+    animation: badge-line-appear 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .trust-badge-item .checkmark-icon {
+    opacity: 0;
+    animation: checkmark-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .trust-badge-item:nth-child(1) { animation-delay: 0.3s; }
+  .trust-badge-item:nth-child(1) .checkmark-icon { animation-delay: 0.65s; }
+  .trust-badge-item:nth-child(2) { animation-delay: 0.85s; }
+  .trust-badge-item:nth-child(2) .checkmark-icon { animation-delay: 1.2s; }
+  .trust-badge-item:nth-child(3) { animation-delay: 1.4s; }
+  .trust-badge-item:nth-child(3) .checkmark-icon { animation-delay: 1.75s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trust-badge-item,
+    .trust-badge-item .checkmark-icon {
+      animation: none;
+      opacity: 1;
+    }
+  }
+
+  /* Inline Filters Accordion */
+  .filters-accordion {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .filters-accordion.open {
+    grid-template-rows: 1fr;
+  }
+
+  .filters-accordion > div {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* Deals Marquee Banner */
+  .deals-banner {
+    overflow: hidden;
+    white-space: nowrap;
+    background: linear-gradient(90deg, rgb(var(--color-brand-primary) / 0.1), rgb(var(--color-brand-secondary) / 0.1), rgb(var(--color-brand-primary) / 0.1));
+    border-bottom: 1px solid rgb(var(--color-brand-primary) / 0.15);
+    padding: 6px 0;
+  }
+
+  .deals-banner-track {
+    display: inline-flex;
+    animation: marquee-scroll 40s linear infinite;
+  }
+
+  .deals-banner-track:hover {
+    animation-play-state: paused;
+  }
+
+  .deals-banner-slow .deals-banner-track {
+    animation-duration: 60s;
+  }
+
+  /* Promo popup entrance */
+  @keyframes promo-pop {
+    from { opacity: 0; transform: translateY(1rem) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .promo-pop {
+    animation: promo-pop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Pulsing lead item = banner title */
+  @keyframes banner-title-pulse {
+    0%, 100% {
+      color: rgb(var(--color-focus));
+      filter: drop-shadow(0 0 3px rgb(var(--color-focus) / 0.35));
+    }
+    50% {
+      color: rgb(var(--color-brand-secondary));
+      filter: drop-shadow(0 0 9px rgb(var(--color-brand-secondary) / 0.6));
+    }
+  }
+
+  .deals-banner-item.banner-title-item,
+  .deals-banner-item.banner-title-item svg {
+    animation: banner-title-pulse 2.4s ease-in-out infinite;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deals-banner-track {
+      animation: none;
+    }
+  }
+
+  @keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .deals-banner-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgb(var(--color-focus));
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  /* Services banner: light purple variation, matching the homepage services panel */
+  .deals-banner.deals-banner-services {
+    background: linear-gradient(90deg, rgb(var(--color-brand-secondary) / 0.14), rgb(var(--color-brand-primary) / 0.06) 50%, rgb(var(--color-brand-secondary) / 0.14));
+    border-bottom-color: rgb(var(--color-brand-secondary) / 0.28);
+  }
+
+  /* Product names alternate cyan / white for readability */
+  .deals-banner-products .deals-banner-item:nth-child(even) {
+    color: rgb(var(--color-text-primary));
+  }
+
+  .deals-banner-item .deal-price {
+    color: rgb(var(--color-warning) / 0.7);
+  }
+
+  .deals-banner-item .deal-sep {
+    color: rgb(var(--color-text-muted) / 0.3);
+    margin: 0 8px;
+  }
+
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: rgb(var(--color-brand-primary)) rgb(var(--color-surface));
+  scrollbar-width: thin;
+}
+
+/* Freeze scroll while booting: Layout measures header+banner, sets --snap-top,
+   then unlocks — so the first visible frame is already at absolute top. */
+html.booting {
+  overflow: hidden !important;
+}
+
+/* Snap stays disabled until the user's first scroll gesture (see Layout) */
+::-webkit-scrollbar {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-surface));
+}
+
+::-webkit-scrollbar-thumb {
+  border: 0.2rem solid rgb(var(--color-surface));
+  border-radius: 999px;
+  background: rgb(var(--color-brand-primary) / 0.72);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-focus));
+}
+

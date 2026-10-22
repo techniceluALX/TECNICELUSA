@@ -22,5 +22,26 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "./components/**/*.ts",
+    "./components/**/*.tsx",
+    "./config/**/*.ts",
+    "./config/**/*.tsx",
+    "./hooks/**/*.ts",
+    "./hooks/**/*.tsx",
+    "./i18n/**/*.ts",
+    "./i18n/**/*.tsx",
+    "./lib/**/*.ts",
+    "./lib/**/*.tsx",
+    "./pages/**/*.ts",
+    "./pages/**/*.tsx",
+    "./providers/**/*.ts",
+    "./providers/**/*.tsx",
+    "./store/**/*.ts",
+    "./store/**/*.tsx",
+    "./types/**/*.ts",
+    "./types/**/*.tsx"
+  ]
 }
